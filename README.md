@@ -2,19 +2,20 @@
 Automated parameter tuning for YOLO models in people counting tasks. Features model comparison, CSV reports, visualizations and annotated images.
 
 
-## 🎯 Funkcje
-- Automatyczne testowanie kombinacji parametrów (conf/iou)
-- Porównanie 5 modeli YOLO (n, s, m, l, x)
-- Generowanie raportów CSV i wykresów PNG
-- Eksport obrazów z adnotacjami detekcji
-- Walidacja MAE względem rzeczywistych wartości
+
+## 🎯 Features
+- Automated parameter combination testing (confidence/IoU)
+- Comparison of 5 YOLO models (nano, small, medium, large, xlarge)
+- CSV reports and PNG visualizations
+- Export of annotated detection images
+- MAE validation against ground truth
 
 
-## 🛠️ Wymagania wstępne
-- System: Windows/Linux/macOS
-- Python 3.7+ ([pobierz](https://www.python.org/downloads/))
-- NVIDIA GPU (opcjonalnie, ale zalecane)
-- 9GB+ wolnego miejsca na dysku
+## 🛠️ Requirements
+- OS: Windows/Linux/macOS
+- Python 3.8+ ([download](https://www.python.org/downloads/))
+- NVIDIA GPU (optional but recommended)
+- 9GB+ free disk space
 
 ## 📥 Installation
 
