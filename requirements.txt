@@ -1,0 +1,11 @@
+# 📝 requirements.txt
+
+```txt
+ultralytics==8.2.27
+opencv-python==4.9.0.80
+numpy==1.26.4
+torch==2.3.0+cu121  # For CUDA 12.1 (use torch==2.3.0 for CPU-only)
+scikit-learn==1.4.2
+matplotlib==3.8.3
+pandas==2.2.2
+tqdm==4.66.2  # Optional: For progress bars
