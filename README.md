@@ -69,75 +69,79 @@ and place them in YOLO_wagi/.
 
 **3. Edit Ground Truth Values in script:**
 
-# In people_counter_optimization.py, line 7:
+In people_counter_optimization.py, line 7:
 actual_people_counts = [15, 13, 31, ...]  # True counts for images 1.jpg, 2.jpg,...
 
-
-## 🚀 Usage
-
+## ⚙️ Configuration
+Modify the Configuration section at the top of YOLOv11_evaluation.py:
 ```bash
-python people_counter_optimization.py
+    # Paths to model weight files
+    models_paths = [
+        'YOLO_wagi/yolo11n.pt',
+        'YOLO_wagi/yolo11s.pt',
+        'YOLO_wagi/yolo11m.pt',
+        'YOLO_wagi/yolo11l.pt',
+        'YOLO_wagi/yolo11x.pt'
+    ]
+    
+    # Input and output directories
+    input_folder = 'input_images1'
+    output_root  = 'results_tuned'
+    
+    # Number of repetitions per parameter combo (set to 1 for speed)
+    n_runs = 1
+    
+    # Device selection
+    device = '0' if torch.cuda.is_available() else 'cpu'
+    
+    # Inference image size (e.g., 640, 1280, 3200)
+    inference_size = 3200
+    
+    # Save annotated images for best parameters?
+    save_annotated_images = True
+    
+    # Confidence thresholds to search
+    conf_thresholds = [0.06, 0.07, 0.08, 0.09, 0.13, 0.14, 0.15]
+    
+    # IoU thresholds to search
+    iou_thresholds  = [0.26, 0.27, 0.28, 0.29, 0.30, 0.31, 0.32, 0.33]
 ```
+Adjust these values and lists to suit your dataset size and desired parameter ranges.
 
-Processing Pipeline:
-Automatic device detection (GPU/CPU)
+##🚀 Usage
+    ```bash
+    python people_counter_optimization.py
+    ```
+    Workflow:
+Warm up on 0.jpg
+Test every (confidence, IoU) pair
+Compute MAE against actual_people_counts
+Record the best thresholds per model
+Re-run inference with best parameters
+Save CSV reports and PNG plots
+(Optional) Save annotated images in results_tuned/<model>_best_results/
 
-Testing 35 parameter combinations per model
+## 📊 Outputs
+   
+In results_tuned/ you will find:
+- final_reports_csv/
+    - processing_times_best.csv — per-image inference times
+    - people_counts_best.csv — per-image detection counts
+    - summary_best.csv — best thresholds, MAE, total time & counts
+- final_plots/
+    - comparison_best_params.png — bar charts of times and counts
+    - summary_best_params.png — summary charts
+- <model>_best_results/ (if save_annotated_images=True)
+Annotated images showing detected people with bounding boxes and confidence labels.
 
-Generating results in results_tuned/:
-
-📊 Comparison plots (PNG)
-
-📄 CSV reports with timings and counts
-
-🖼️ Annotated images for best parameters
-
-⚙️ Configuration
-Edit parameters in the Configuration section of people_counter_optimization.py:
-
-```bash
-# Paths to model weight files
-models_paths = [
-    'YOLO_wagi/yolo11n.pt',
-    'YOLO_wagi/yolo11s.pt',
-    'YOLO_wagi/yolo11m.pt',
-    'YOLO_wagi/yolo11l.pt',
-    'YOLO_wagi/yolo11x.pt'
-]
-
-# Input and output directories
-input_folder = 'input_images1'
-output_root  = 'results_tuned'
-
-# Number of repetitions per parameter combo (set to 1 for speed)
-n_runs = 1
-
-# Device selection
-device = '0' if torch.cuda.is_available() else 'cpu'
-
-# Inference image size (e.g., 640, 1280, 3200)
-inference_size = 3200
-
-# Save annotated images for best parameters?
-save_annotated_images = True
-
-# Confidence thresholds to search
-conf_thresholds = [0.06, 0.07, 0.08, 0.09, 0.13, 0.14, 0.15]
-
-# IoU thresholds to search
-iou_thresholds  = [0.26, 0.27, 0.28, 0.29, 0.30, 0.31, 0.32, 0.33]
-
-```
-Adjust these lists to match the length of your test set and desired parameter ranges.
+## 🔍 Example Outputs
+- MAE comparison table across all YOLO variants
+- Bar charts visualizing processing time vs. count accuracy
+- Sample annotated images for visual inspection
 
 
-## 📊 Results
-Sample Outputs
-Model Comparison
-Performance Summary
 
-Output Files
-File	Description
-people_counts_best.csv	Per-image detection counts
-processing_times_best.csv	Per-image processing times
-summary_best.csv	MAE scores and total statistics
+
+
+
+
