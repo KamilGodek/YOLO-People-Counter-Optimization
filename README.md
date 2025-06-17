@@ -23,8 +23,8 @@ Automated parameter tuning for YOLO models in people counting tasks. Features mo
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/your_username/yolo-people-counter.git
-cd yolo-people-counter
+git clone https://github.com/KamilGodek/YOLO-People-Counter-Optimization
+cd ..
 ```
 
 2. Create Virtual Environment
