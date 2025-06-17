@@ -23,23 +23,27 @@ Automated parameter tuning for YOLO models in people counting tasks. Features mo
 ```bash
 git clone https://github.com/your_username/yolo-people-counter.git
 cd yolo-people-counter
-
+```
 2. Create Virtual Environment
-
+```bash
 python -m venv venv
 # Activation:
 source venv/bin/activate  # Linux/macOS
 .\venv\Scripts\activate   # Windows
+```
 
 3. Install Dependencies
+```bash
 pip install -r requirements.txt
+```
 
 📂 Data Preparation
 Folder Structure
-
+```bash
 ├── YOLO_weights/        # YOLO model files
 ├── input_images/        # Test images
 └── results_tuned/       # Generated results
+```
 
 Steps:
 
@@ -63,7 +67,9 @@ actual_people_counts = [15, 13, 31, ...]  # True counts for images 1.jpg, 2.jpg,
 
 🚀 Usage
 
+```bash
 python people_counter_optimization.py
+```
 
 Processing Pipeline:
 Automatic device detection (GPU/CPU)
@@ -81,11 +87,15 @@ Generating results in results_tuned/:
 ⚙️ Configuration
 Edit parameters in the Configuration section of people_counter_optimization.py:
 
+```bash
 # --- Configuration ---
 conf_thresholds = [0.06, 0.15]    # Confidence threshold range
 iou_thresholds = [0.26, 0.33]     # IoU threshold range
 inference_size = 3200              # Processing resolution (e.g., 640, 1280)
 save_annotated_images = True       # Export detection visualizations
+```
+Adjust these lists to match the length of your test set and desired parameter ranges.
+
 
 📊 Results
 Sample Outputs
